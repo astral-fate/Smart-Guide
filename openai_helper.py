@@ -4,13 +4,12 @@ import os
 
 class OpenAIClient:
     def __init__(self):
+        # Simple initialization without any additional parameters
         self.api_key = st.secrets["OPENAI_API_KEY"] if "OPENAI_API_KEY" in st.secrets else os.environ.get("OPENAI_API_KEY")
         if not self.api_key:
             raise Exception("OpenAI API key not found in environment variables or Streamlit secrets")
         
-        self.client = OpenAI(
-            api_key=self.api_key
-        )
+        self.client = OpenAI(api_key=self.api_key)  # Only pass api_key
     
     def generate_response(self, prompt: str, context: str = None) -> tuple[str, bool]:
         try:
