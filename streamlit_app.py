@@ -5,8 +5,14 @@ from openai import OpenAI
 import uuid
 from datetime import datetime
 import json
+from openai_helper import OpenAIClient
 
 # Initialize OpenAI client
+try:
+    client = OpenAIClient()
+except Exception as e:
+    st.error(f"Failed to initialize OpenAI client: {str(e)}")
+    st.stop()
 class OpenAIClient:
     def __init__(self):
         self.api_key = os.environ.get("OPENAI_API_KEY")
